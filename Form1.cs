@@ -14,7 +14,7 @@ namespace AgentieTurismBackend
     public partial class Form1 : Form
     {
 
-        readonly string connectionString = "Data Source=FUJITSU\\SQLEXPRESS;Initial Catalog=AgentieTurism;Integrated Security=True";
+        readonly string connectionString = "Data Source=STANCIU\\SQLEXPRESS;Initial Catalog=AgentieTurism;Integrated Security=True";
         SqlConnection conn = null;
 
         readonly string connStatus = "Status: Database connected";
@@ -48,64 +48,9 @@ namespace AgentieTurismBackend
                 conn = null;
                 statusLabel.Text = notConnStatus;
             }
-            catch
+            catch(NullReferenceException e)
             {
 
-            }
-        }
-
-        private void ConnectToDB_Click(object sender, EventArgs e)
-        {
-            OpenDBConnection();   
-        }
-
-        private void DisposeDB_Click(object sender, EventArgs e)
-        {
-            CloseDBConnection();
-        }
-
-        private void TestQuery_Click(object sender, EventArgs e)
-        {
-            SqlCommand cmd = new SqlCommand
-            {
-                Connection = conn,
-                CommandText = "SELECT UnitatiCazare.Nume, UnitatiCazare.PretNoapte, Destinatie.Denumire AS Oras " +
-                              "FROM UnitatiCazare JOIN Destinatie ON UnitatiCazare.IDDestinatie = Destinatie.IDDestinatie" +
-                              " WHERE Destinatie.Denumire LIKE @match"
-            };
-            SqlParameter matchParam = new SqlParameter
-            {
-                ParameterName = "@match",
-                Value = textBox1.Text + "%"
-            };
-            cmd.Parameters.Add(matchParam);
-
-            try
-            {
-                SqlDataReader reader = cmd.ExecuteReader();
-                queryResult.Clear();
-                for(int i = 0; i < reader.FieldCount; i++)
-                {
-                    queryResult.AppendText(reader.GetName(i) + "\t\t");
-                }
-                queryResult.AppendText("\r\n\r\n");
-                while (reader.Read())
-                {
-                    for (int i = 0; i < reader.FieldCount; i++)
-                    {
-                        queryResult.AppendText(reader[i] + "\t\t");
-                    }
-                    queryResult.AppendText("\r\n");
-                }
-            }
-            catch
-            {
-                MessageBox.Show("DB Error!");
-            }
-            finally
-            {
-                cmd.Dispose();
-                CloseDBConnection();
             }
         }
 
@@ -113,6 +58,41 @@ namespace AgentieTurismBackend
         {
             CloseDBConnection();
             
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            OpenDBConnection();
+        }
+
+        private void ManagementDestButton_Click(object sender, EventArgs e)
+        {
+            Administrare_Locatii.addButton DestForm = new Administrare_Locatii.addButton(conn);
+            DestForm.Show();
+        }
+
+        private void ManagementUCButton_Click(object sender, EventArgs e)
+        {
+            Administrare_Locatii.ManagementUCForm UCForm = new Administrare_Locatii.ManagementUCForm(conn);
+            UCForm.Show();
+        }
+
+        private void ManagementExcButton_Click(object sender, EventArgs e)
+        {
+            Administrare_Locatii.ManagementExcForm ExcForm = new Administrare_Locatii.ManagementExcForm(conn);
+            ExcForm.Show();
+        }
+
+        private void ManagementClientiButton_Click(object sender, EventArgs e)
+        {
+            Administrare_Clienti.ManagementClientiForm ClientiForm = new Administrare_Clienti.ManagementClientiForm(conn);
+            ClientiForm.Show();
+        }
+
+        private void ManagementRzvButton_Click(object sender, EventArgs e)
+        {
+            Administrare_Clienti.ManagementRzvForm RzvForm = new Administrare_Clienti.ManagementRzvForm(conn);
+            RzvForm.Show();
         }
     }
 }
