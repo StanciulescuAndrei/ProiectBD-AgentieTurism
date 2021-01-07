@@ -113,6 +113,9 @@
     <EmbeddedResource Include="Administrare Locatii\ManagementDestForm.resx">
       <DependentUpon>ManagementDestForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Administrare Locatii\ManagementUCForm.resx">
+      <DependentUpon>ManagementUCForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
