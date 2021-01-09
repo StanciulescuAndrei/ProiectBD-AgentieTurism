@@ -60,6 +60,7 @@
             this.stergeButton.TabIndex = 13;
             this.stergeButton.Text = "Sterge";
             this.stergeButton.UseVisualStyleBackColor = true;
+            this.stergeButton.Click += new System.EventHandler(this.stergeButton_Click);
             // 
             // modificaButton
             // 
@@ -70,6 +71,7 @@
             this.modificaButton.TabIndex = 12;
             this.modificaButton.Text = "Modifica";
             this.modificaButton.UseVisualStyleBackColor = true;
+            this.modificaButton.Click += new System.EventHandler(this.modificaButton_Click);
             // 
             // addButton
             // 
@@ -80,6 +82,7 @@
             this.addButton.TabIndex = 11;
             this.addButton.Text = "Adauga";
             this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // searchButton
             // 

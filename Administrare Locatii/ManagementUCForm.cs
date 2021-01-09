@@ -95,5 +95,56 @@ namespace AgentieTurismBackend.Administrare_Locatii
             Cazare.Text = dataGridView.SelectedCells[1].Value.ToString();
             Pret.Value = Decimal.Parse(dataGridView.SelectedCells[2].Value.ToString());
         }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            SqlCommand command = new SqlCommand("INSERT into UnitatiCazare(IDDestinatie, Nume, PretNoapte) " +
+                                                " values((SELECT IDDestinatie FROM Destinatie WHERE Denumire = @dest), @nume, @pret)", conn);
+            SqlParameter parameter1 = new SqlParameter { ParameterName = "@dest", Value = Destinatie_comboBox.SelectedItem.ToString()};
+            SqlParameter parameter2 = new SqlParameter { ParameterName = "@nume", Value = Cazare.Text };
+            SqlParameter parameter3 = new SqlParameter { ParameterName = "@pret", Value = Pret.Value.ToString() };
+            command.Parameters.Add(parameter1);
+            command.Parameters.Add(parameter2);
+            command.Parameters.Add(parameter3);
+            command.ExecuteNonQuery();
+            UpdateDataView();
+        }
+
+        private void modificaButton_Click(object sender, EventArgs e)
+        {
+            if (dataGridView.SelectedCells.Count != 3)
+                return;
+            SqlCommand command = new SqlCommand(" UPDATE UnitatiCazare " +
+                                                " SET IDDestinatie = (SELECT IDDestinatie FROM Destinatie WHERE Denumire = @dest_nou), Nume = @nume_nou, PretNoapte = @pret_nou" +
+                                                " WHERE IDDestinatie = (SELECT IDDestinatie FROM Destinatie WHERE Denumire = @dest) AND Nume=@nume AND PretNoapte=@pret", conn);
+            List<SqlParameter> sqlParameters = new List<SqlParameter>();
+            sqlParameters.Add(new SqlParameter { ParameterName = "@dest_nou", Value = Destinatie_comboBox.SelectedItem.ToString() });
+            sqlParameters.Add(new SqlParameter { ParameterName = "@nume_nou", Value = Cazare.Text });
+            sqlParameters.Add(new SqlParameter { ParameterName = "@pret_nou", Value = Pret.Value.ToString() });
+            sqlParameters.Add(new SqlParameter { ParameterName = "@dest", Value = dataGridView.SelectedCells[0].Value.ToString() });
+            sqlParameters.Add(new SqlParameter { ParameterName = "@nume", Value = dataGridView.SelectedCells[1].Value.ToString() });
+            sqlParameters.Add(new SqlParameter { ParameterName = "@pret", Value = dataGridView.SelectedCells[2].Value.ToString() });
+
+            foreach(SqlParameter parameter in sqlParameters)
+            {
+                command.Parameters.Add(parameter);
+            } 
+            command.ExecuteNonQuery();
+            UpdateDataView();
+        }
+
+        private void stergeButton_Click(object sender, EventArgs e)
+        {
+            SqlCommand command = new SqlCommand("DELETE FROM UnitatiCazare " +
+                                                " WHERE IDDestinatie = (SELECT IDDestinatie FROM Destinatie WHERE Denumire = @dest) AND Nume=@nume AND PretNoapte=@pret", conn);
+            SqlParameter parameter1 = new SqlParameter { ParameterName = "@dest", Value = Destinatie_comboBox.SelectedItem.ToString() };
+            SqlParameter parameter2 = new SqlParameter { ParameterName = "@nume", Value = Cazare.Text };
+            SqlParameter parameter3 = new SqlParameter { ParameterName = "@pret", Value = Pret.Value.ToString() };
+            command.Parameters.Add(parameter1);
+            command.Parameters.Add(parameter2);
+            command.Parameters.Add(parameter3);
+            command.ExecuteNonQuery();
+            UpdateDataView();
+        }
     }
 }
