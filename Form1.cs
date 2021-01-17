@@ -94,5 +94,11 @@ namespace AgentieTurismBackend
             Administrare_Clienti.ManagementRzvForm RzvForm = new Administrare_Clienti.ManagementRzvForm(conn);
             RzvForm.Show();
         }
+
+        private void regClientExcButton_Click(object sender, EventArgs e)
+        {
+            AdminComplex.RegClientExc regClientExc = new AdminComplex.RegClientExc(conn);
+            regClientExc.Show();
+        }
     }
 }

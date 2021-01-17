@@ -67,6 +67,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminComplex\RegClientExc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminComplex\RegClientExc.Designer.cs">
+      <DependentUpon>RegClientExc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Administrare Clienti\ManagementClientiForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +116,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AdminComplex\RegClientExc.resx">
+      <DependentUpon>RegClientExc.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Administrare Clienti\ManagementClientiForm.resx">
       <DependentUpon>ManagementClientiForm.cs</DependentUpon>
     </EmbeddedResource>

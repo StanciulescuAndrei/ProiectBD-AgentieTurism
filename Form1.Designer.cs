@@ -36,6 +36,7 @@
             this.ManagementRzvButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.regClientExcButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // statusLabel
@@ -123,11 +124,23 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Administrare clienti";
             // 
+            // regClientExcButton
+            // 
+            this.regClientExcButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.regClientExcButton.Location = new System.Drawing.Point(12, 393);
+            this.regClientExcButton.Name = "regClientExcButton";
+            this.regClientExcButton.Size = new System.Drawing.Size(160, 61);
+            this.regClientExcButton.TabIndex = 10;
+            this.regClientExcButton.Text = "Inregistrare clienti-excursie";
+            this.regClientExcButton.UseVisualStyleBackColor = true;
+            this.regClientExcButton.Click += new System.EventHandler(this.regClientExcButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(519, 648);
+            this.Controls.Add(this.regClientExcButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ManagementRzvButton);
@@ -137,7 +150,7 @@
             this.Controls.Add(this.ManagementUCButton);
             this.Controls.Add(this.statusLabel);
             this.Name = "Form1";
-            this.Text = "Pagina Principala";
+            this.Text = "Pagina Principala Management";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
@@ -154,6 +167,7 @@
         private System.Windows.Forms.Button ManagementRzvButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button regClientExcButton;
     }
 }
 
