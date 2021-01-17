@@ -110,8 +110,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Administrare Clienti\ManagementClientiForm.resx">
+      <DependentUpon>ManagementClientiForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Administrare Clienti\ManagementRzvForm.resx">
+      <DependentUpon>ManagementRzvForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Administrare Locatii\ManagementDestForm.resx">
       <DependentUpon>ManagementDestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Administrare Locatii\ManagementExcForm.resx">
+      <DependentUpon>ManagementExcForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Administrare Locatii\ManagementUCForm.resx">
       <DependentUpon>ManagementUCForm.cs</DependentUpon>

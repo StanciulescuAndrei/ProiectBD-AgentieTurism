@@ -57,7 +57,14 @@ namespace AgentieTurismBackend.Administrare_Locatii
             SqlCommand command = new SqlCommand("INSERT into Destinatie(Denumire) values (@nume)", conn);
             SqlParameter parameter = new SqlParameter { ParameterName = "@nume", Value = fieldValue.Text};
             command.Parameters.Add(parameter);
-            command.ExecuteNonQuery();
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.ToString(), "Eroare baza de date", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             UpdateDataView();
             fieldValue.Text = "";
         }
@@ -71,7 +78,14 @@ namespace AgentieTurismBackend.Administrare_Locatii
             SqlParameter parameter2 = new SqlParameter { ParameterName = "@nume_nou", Value = fieldValue.Text };
             command.Parameters.Add(parameter1);
             command.Parameters.Add(parameter2);
-            command.ExecuteNonQuery();
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.ToString(), "Eroare baza de date", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             UpdateDataView();
             fieldValue.Text = "";
         }
@@ -85,7 +99,14 @@ namespace AgentieTurismBackend.Administrare_Locatii
             SqlCommand command = new SqlCommand("DELETE from Destinatie WHERE Denumire = @nume", conn);
             SqlParameter parameter = new SqlParameter { ParameterName = "@nume", Value = dataGridView.SelectedCells[0].Value.ToString() };
             command.Parameters.Add(parameter);
-            command.ExecuteNonQuery();
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.ToString(), "Eroare baza de date", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             UpdateDataView();
             fieldValue.Text = "";
         }

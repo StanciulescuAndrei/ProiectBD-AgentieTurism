@@ -106,7 +106,14 @@ namespace AgentieTurismBackend.Administrare_Locatii
             command.Parameters.Add(parameter1);
             command.Parameters.Add(parameter2);
             command.Parameters.Add(parameter3);
-            command.ExecuteNonQuery();
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.ToString(), "Eroare baza de date", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             UpdateDataView();
         }
 
@@ -128,8 +135,15 @@ namespace AgentieTurismBackend.Administrare_Locatii
             foreach(SqlParameter parameter in sqlParameters)
             {
                 command.Parameters.Add(parameter);
-            } 
-            command.ExecuteNonQuery();
+            }
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.ToString(), "Eroare baza de date", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             UpdateDataView();
         }
 
@@ -143,8 +157,40 @@ namespace AgentieTurismBackend.Administrare_Locatii
             command.Parameters.Add(parameter1);
             command.Parameters.Add(parameter2);
             command.Parameters.Add(parameter3);
-            command.ExecuteNonQuery();
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.ToString(), "Eroare baza de date", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             UpdateDataView();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Pret_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Destinatie_comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Cazare_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void searchTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

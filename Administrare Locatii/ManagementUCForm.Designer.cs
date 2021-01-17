@@ -50,6 +50,7 @@
             this.Cazare.Name = "Cazare";
             this.Cazare.Size = new System.Drawing.Size(264, 24);
             this.Cazare.TabIndex = 14;
+            this.Cazare.TextChanged += new System.EventHandler(this.Cazare_TextChanged);
             // 
             // stergeButton
             // 
@@ -102,6 +103,7 @@
             this.searchTextBox.Name = "searchTextBox";
             this.searchTextBox.Size = new System.Drawing.Size(358, 24);
             this.searchTextBox.TabIndex = 9;
+            this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
             // 
             // dataGridView
             // 
@@ -124,6 +126,7 @@
             this.Destinatie_comboBox.Name = "Destinatie_comboBox";
             this.Destinatie_comboBox.Size = new System.Drawing.Size(160, 26);
             this.Destinatie_comboBox.TabIndex = 15;
+            this.Destinatie_comboBox.SelectedIndexChanged += new System.EventHandler(this.Destinatie_comboBox_SelectedIndexChanged);
             // 
             // Pret
             // 
@@ -137,6 +140,7 @@
             this.Pret.Name = "Pret";
             this.Pret.Size = new System.Drawing.Size(99, 24);
             this.Pret.TabIndex = 16;
+            this.Pret.ValueChanged += new System.EventHandler(this.Pret_ValueChanged);
             // 
             // label1
             // 
@@ -147,6 +151,7 @@
             this.label1.Size = new System.Drawing.Size(44, 20);
             this.label1.TabIndex = 17;
             this.label1.Text = "RON";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // orderLabel
             // 
