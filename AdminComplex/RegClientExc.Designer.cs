@@ -183,6 +183,11 @@
             // 
             this.Avans.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Avans.Location = new System.Drawing.Point(80, 721);
+            this.Avans.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.Avans.Name = "Avans";
             this.Avans.Size = new System.Drawing.Size(120, 29);
             this.Avans.TabIndex = 13;

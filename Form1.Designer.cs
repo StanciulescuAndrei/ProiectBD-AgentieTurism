@@ -37,13 +37,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.regClientExcButton = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.statExcursii = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // statusLabel
             // 
             this.statusLabel.AutoSize = true;
             this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusLabel.Location = new System.Drawing.Point(9, 614);
+            this.statusLabel.Location = new System.Drawing.Point(9, 354);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(155, 18);
             this.statusLabel.TabIndex = 2;
@@ -85,7 +87,7 @@
             // ManagementClientiButton
             // 
             this.ManagementClientiButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ManagementClientiButton.Location = new System.Drawing.Point(12, 222);
+            this.ManagementClientiButton.Location = new System.Drawing.Point(12, 150);
             this.ManagementClientiButton.Name = "ManagementClientiButton";
             this.ManagementClientiButton.Size = new System.Drawing.Size(160, 61);
             this.ManagementClientiButton.TabIndex = 6;
@@ -96,7 +98,7 @@
             // ManagementRzvButton
             // 
             this.ManagementRzvButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ManagementRzvButton.Location = new System.Drawing.Point(178, 222);
+            this.ManagementRzvButton.Location = new System.Drawing.Point(178, 150);
             this.ManagementRzvButton.Name = "ManagementRzvButton";
             this.ManagementRzvButton.Size = new System.Drawing.Size(160, 61);
             this.ManagementRzvButton.TabIndex = 7;
@@ -118,7 +120,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 194);
+            this.label2.Location = new System.Drawing.Point(12, 122);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(194, 25);
             this.label2.TabIndex = 9;
@@ -127,7 +129,7 @@
             // regClientExcButton
             // 
             this.regClientExcButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.regClientExcButton.Location = new System.Drawing.Point(12, 393);
+            this.regClientExcButton.Location = new System.Drawing.Point(12, 240);
             this.regClientExcButton.Name = "regClientExcButton";
             this.regClientExcButton.Size = new System.Drawing.Size(160, 61);
             this.regClientExcButton.TabIndex = 10;
@@ -135,11 +137,34 @@
             this.regClientExcButton.UseVisualStyleBackColor = true;
             this.regClientExcButton.Click += new System.EventHandler(this.regClientExcButton_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(12, 212);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(230, 25);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Administrare complexa";
+            // 
+            // statExcursii
+            // 
+            this.statExcursii.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statExcursii.Location = new System.Drawing.Point(178, 240);
+            this.statExcursii.Name = "statExcursii";
+            this.statExcursii.Size = new System.Drawing.Size(160, 61);
+            this.statExcursii.TabIndex = 12;
+            this.statExcursii.Text = "Statistici Excursii";
+            this.statExcursii.UseVisualStyleBackColor = true;
+            this.statExcursii.Click += new System.EventHandler(this.statExcursii_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(519, 648);
+            this.ClientSize = new System.Drawing.Size(519, 382);
+            this.Controls.Add(this.statExcursii);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.regClientExcButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -168,6 +193,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button regClientExcButton;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button statExcursii;
     }
 }
 

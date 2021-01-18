@@ -145,7 +145,7 @@ namespace AgentieTurismBackend.AdminComplex
                 return;
             }
             // Verificam daca s-a ales cazarea in acelasi oras ca exscursia
-            if(excursiiGrid.SelectedCells[2].Value != cazareGrid.SelectedCells[2].Value)
+            if(excursiiGrid.SelectedCells[2].Value.ToString().CompareTo(cazareGrid.SelectedCells[2].Value.ToString()) != 0)
             {
                 MessageBox.Show("Cazarea nu e in acelasi oras ca excursia!", "Eroare selectie date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;

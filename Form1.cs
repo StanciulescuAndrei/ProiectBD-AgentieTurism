@@ -100,5 +100,11 @@ namespace AgentieTurismBackend
             AdminComplex.RegClientExc regClientExc = new AdminComplex.RegClientExc(conn);
             regClientExc.Show();
         }
+
+        private void statExcursii_Click(object sender, EventArgs e)
+        {
+            AdminComplex.StatExcursii statExcursii = new AdminComplex.StatExcursii(conn);
+            statExcursii.Show();
+        }
     }
 }
