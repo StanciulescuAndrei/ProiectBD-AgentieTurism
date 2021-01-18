@@ -144,6 +144,12 @@ namespace AgentieTurismBackend.AdminComplex
                 MessageBox.Show("Nu ati selectat clientii!", "Eroare selectie date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            // Verificam daca s-a ales cazarea in acelasi oras ca exscursia
+            if(excursiiGrid.SelectedCells[2].Value != cazareGrid.SelectedCells[2].Value)
+            {
+                MessageBox.Show("Cazarea nu e in acelasi oras ca excursia!", "Eroare selectie date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             int lastID = 0;
             // Mai intai generam noua rezervare, apoi o conectam cu clientii respectivi prin tabelul de legatura
             using (var command = new SqlCommand("INSERT into Rezervare(IDExcursie, IDCazare, DataPlecare, Avans) " +
