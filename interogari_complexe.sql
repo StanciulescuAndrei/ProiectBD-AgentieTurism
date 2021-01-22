@@ -48,14 +48,14 @@ WHERE 1 = (
 ORDER BY TotalRezervari DESC
 
 -- 4. Cazarile unde nu s-au mai facut rezervari in ultimele x luni si costa peste y lei pe noapte
-SELECT UC.Nume, D.Denumire
+SELECT UC.Nume, D.Denumire, UC.PretNoapte
 FROM UnitatiCazare as UC
 JOIN Destinatie as D on D.IDDestinatie = UC.IDDestinatie 
 WHERE UC.PretNoapte > 100
 and
-0 = (
-		SELECT COUNT(1)
+not exists (
+		SELECT *
 		FROM Rezervare as R
 		WHERE R.IDCazare = UC.IDCazare
 		and R.DataPlecare > '2021-04-21'
-	)
+	 )

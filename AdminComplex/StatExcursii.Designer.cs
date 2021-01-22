@@ -245,6 +245,7 @@
             this.Controls.Add(this.label1);
             this.Name = "StatExcursii";
             this.Text = "StatExcursii";
+            this.Load += new System.EventHandler(this.StatExcursii_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();

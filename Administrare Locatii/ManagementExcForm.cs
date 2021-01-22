@@ -22,6 +22,7 @@ namespace AgentieTurismBackend.Administrare_Locatii
 
         private void UpdateCategorii()
         {
+            // Actualizeaza valorile posibile din meniul drop-down cu valorile din tabelul de categorii
             SqlCommand command = new SqlCommand("SELECT Denumire FROM Categorie", conn);
             using (var reader = command.ExecuteReader())
             {
@@ -34,6 +35,7 @@ namespace AgentieTurismBackend.Administrare_Locatii
 
         private void UpdateDestinatii()
         {
+            // Actualizeaza valorile posibile din meniul drop-down cu valorile din tabelul de detinatii
             SqlCommand command = new SqlCommand("SELECT Denumire FROM Destinatie", conn);
             using (var reader = command.ExecuteReader())
             {
@@ -46,6 +48,7 @@ namespace AgentieTurismBackend.Administrare_Locatii
 
         private void UpdateDataView()
         {
+            // Extrage excursiile din baza de date, impreuna cu destinatiile si categoriile respective, ca sa nu fie afisate chei artificiale
             SqlCommand command = new SqlCommand("SELECT Ex.IDExcursie, Cat.Denumire as Categorie, Dest.Denumire as Destinatie, Ex.Denumire as Denumire, Ex.Durata as Durata, Ex.NrMaximParticipanti as MaxParticipanti, Ex.PretBaza as PretBaza, Ex.Transport as TransportInclus " +
                                                 " FROM Excursie as Ex JOIN Destinatie as Dest on Ex.IDDestinatie = Dest.IDDestinatie" +
                                                 " JOIN Categorie as Cat on Ex.IDCategorie = Cat.IDCategorie" +
@@ -86,6 +89,7 @@ namespace AgentieTurismBackend.Administrare_Locatii
 
         private void addButton_Click(object sender, EventArgs e)
         {
+            // Inserarea unei valori noi cu subcereri pentru a obtine cheia primara in functie de denumire (pentru categorie si destinatie)
             SqlCommand command = new SqlCommand("INSERT into Excursie(IDCategorie, IDDestinatie, Denumire, Durata, NrMaximParticipanti, PretBaza, Transport) " +
                                                 " values(" +
                                                 "(SELECT IDCategorie FROM Categorie WHERE Denumire = @cat), " +
@@ -121,8 +125,10 @@ namespace AgentieTurismBackend.Administrare_Locatii
 
         private void modificaButton_Click(object sender, EventArgs e)
         {
+            // Verificam sa avem un rand intreg selectat
             if (dataGridView.SelectedCells.Count != 8)
                 return;
+            // Facem update cu noile valori dupa ID
             SqlCommand command = new SqlCommand(" UPDATE Excursie " +
                                                 " SET IDCategorie = (SELECT IDCategorie FROM Categorie WHERE Denumire = @cat_nou)," +
                                                 " IDDestinatie = (SELECT IDDestinatie FROM Destinatie WHERE Denumire = @dest_nou)," +
@@ -159,6 +165,10 @@ namespace AgentieTurismBackend.Administrare_Locatii
 
         private void stergeButton_Click(object sender, EventArgs e)
         {
+            // Verificam sa avem un rand intreg selectat
+            if (dataGridView.SelectedCells.Count != 8)
+                return;
+            // Stergem excursia in functie de ID
             SqlCommand command = new SqlCommand("DELETE FROM Excursie " +
                                                 " WHERE IDExcursie = @id", conn);
             SqlParameter parameter1 = new SqlParameter { ParameterName = "@id", Value = dataGridView.SelectedCells[0].Value.ToString() };
@@ -178,6 +188,7 @@ namespace AgentieTurismBackend.Administrare_Locatii
         {
             if (dataGridView.SelectedCells.Count != 8)
                 return;
+            // Cand apasam pe un cap de linie, toata linia va fi selectata, iar valorile vor fi extrase in campurile de sub tabel, pentru a face modificarea mai usoara
             Categorie_comboBox.SelectedItem = dataGridView.SelectedCells[1].Value.ToString();
             Destinatie_comboBox.SelectedItem = dataGridView.SelectedCells[2].Value.ToString();
             Denumire.Text = dataGridView.SelectedCells[3].Value.ToString();

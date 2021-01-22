@@ -47,6 +47,7 @@ namespace AgentieTurismBackend.Administrare_Clienti
 
         private void UpdateDataView()
         {
+            // Extrage rezervarile din baza de date, selectate in functie de termenul de cautare, impreuna cu excursia, cazarea si clientul
             SqlCommand command = new SqlCommand("SELECT Rzv.IDRezervare, Ex.Denumire as Excursie, Cazare.Nume as Cazare, Client.Nume as NumeClient , Client.Prenume as PrenumeClient, Rzv.DataPlecare as Data, Rzv.Avans as Avans" +
                                                 " FROM Rezervare as Rzv" +
                                                 " JOIN Excursie as Ex on Ex.IDExcursie = Rzv.IDExcursie" +
@@ -96,8 +97,10 @@ namespace AgentieTurismBackend.Administrare_Clienti
 
         private void dataGridView_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            // Verificam sa avem un rand intreg selectat
             if (dataGridView.SelectedCells.Count != 7)
                 return;
+            // Cand apasam pe un cap de linie, toata linia va fi selectata, iar valorile vor fi extrase in campurile de sub tabel, pentru a face modificarea mai usoara
             Excursie_comboBox.SelectedItem = dataGridView.SelectedCells[1].Value.ToString();
             Cazare_comboBox.SelectedItem = dataGridView.SelectedCells[2].Value.ToString();
             Avans.Value = Decimal.Parse(dataGridView.SelectedCells[6].Value.ToString());
@@ -107,6 +110,7 @@ namespace AgentieTurismBackend.Administrare_Clienti
 
         private void stergeButton_Click(object sender, EventArgs e)
         {
+            // Sterge rezervarea in functie de cheia primara selectata
             SqlCommand command = new SqlCommand("DELETE FROM Rezervare " +
                                                 " WHERE IDRezervare = @id", conn);
             SqlParameter parameter1 = new SqlParameter { ParameterName = "@id", Value = dataGridView.SelectedCells[0].Value.ToString() };
@@ -124,8 +128,10 @@ namespace AgentieTurismBackend.Administrare_Clienti
 
         private void modificaButton_Click(object sender, EventArgs e)
         {
+            // Verificam sa avem un rand intreg selectat
             if (dataGridView.SelectedCells.Count != 7)
                 return;
+            // Modificam cu noile valori in functie de cheia primara selectata
             SqlCommand command = new SqlCommand(" UPDATE Rezervare " +
                                                 " SET IDExcursie = (SELECT IDExcursie FROM Excursie WHERE Denumire = @exc_nou)," +
                                                 " IDCazare = (SELECT IDCazare FROM UnitatiCazare WHERE Nume = @cazare_nou)," +

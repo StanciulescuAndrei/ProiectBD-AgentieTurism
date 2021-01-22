@@ -33,9 +33,10 @@ namespace AgentieTurismBackend
                 conn.Open();
                 statusLabel.Text = connStatus;
             }
-            catch
+            catch(Exception e)
             {
                 statusLabel.Text = notConnStatus;
+                MessageBox.Show(e.ToString());
             }
         }
 
@@ -50,7 +51,7 @@ namespace AgentieTurismBackend
             }
             catch(NullReferenceException e)
             {
-
+                MessageBox.Show(e.ToString());
             }
         }
 

@@ -22,6 +22,7 @@ namespace AgentieTurismBackend.AdminComplex
 
         private void UpdateClientiView()
         {
+            // Actualizeaza tabela din interfata ce contine clientii
             SqlCommand command = new SqlCommand("SELECT IDClient, Nume, Prenume, CNP" +
                                                 " FROM Client" +
                                                 " WHERE ( Nume LIKE @den) OR (Prenume LIKE @den) OR (Nume LIKE @den) OR (CNP LIKE @den)", conn);
@@ -50,6 +51,7 @@ namespace AgentieTurismBackend.AdminComplex
 
         private void UpdateExcursiiView()
         {
+            // Actualizeaza tabela din interfata ce contine excursiile
             SqlCommand command = new SqlCommand("SELECT Ex.IDExcursie, Cat.Denumire as Categorie, Dest.Denumire as Destinatie, Ex.Denumire as Denumire, Ex.Durata as Durata, Ex.NrMaximParticipanti as MaxParticipanti, Ex.PretBaza as PretBaza, Ex.Transport as TransportInclus " +
                                                  " FROM Excursie as Ex JOIN Destinatie as Dest on Ex.IDDestinatie = Dest.IDDestinatie" +
                                                  " JOIN Categorie as Cat on Ex.IDCategorie = Cat.IDCategorie" +
@@ -79,6 +81,7 @@ namespace AgentieTurismBackend.AdminComplex
 
         private void UpdateCazareView()
         {
+            // Actualizeaza tabela din interfata ce contine cazarile
             SqlCommand command = new SqlCommand("SELECT UC.IDCazare, UC.Nume as Cazare, Dest.Denumire as Destinatie, UC.PretNoapte as Pret " +
                                                  " FROM UnitatiCazare as UC JOIN Destinatie as Dest on UC.IDDestinatie = Dest.IDDestinatie" +
                                                  " WHERE (Dest.Denumire LIKE @den) OR (UC.Nume LIKE @den)", conn);
@@ -139,7 +142,7 @@ namespace AgentieTurismBackend.AdminComplex
                 MessageBox.Show("Nu ati selectat o cazare!", "Eroare selectie date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if(clientiGrid.SelectedCells.Count == 0 || clientiGrid.SelectedCells.Count % 4 != 0) // Se pot alege mai multi clienti
+            if(clientiGrid.SelectedCells.Count == 0 || clientiGrid.SelectedCells.Count % 4 != 0) // Se pot alege mai multi clienti, numarul de celule e multiplu de 4 in cazul asta
             {
                 MessageBox.Show("Nu ati selectat clientii!", "Eroare selectie date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -152,6 +155,7 @@ namespace AgentieTurismBackend.AdminComplex
             }
             int lastID = 0;
             // Mai intai generam noua rezervare, apoi o conectam cu clientii respectivi prin tabelul de legatura
+            // Cu SELECT SCOPE_IDENTITY() obtinem cheia primara generata automat de server
             using (var command = new SqlCommand("INSERT into Rezervare(IDExcursie, IDCazare, DataPlecare, Avans) " +
                                                 " values(" +
                                                 " @id_excursie, " +

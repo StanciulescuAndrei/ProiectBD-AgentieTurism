@@ -17,6 +17,7 @@ namespace AgentieTurismBackend.Administrare_Clienti
 
         private void UpdateDataView()
         {
+            // Extrage clientii din baza de date, selectate in functie de termenul de cautare
             SqlCommand command = new SqlCommand("SELECT IDClient, Nume, Prenume, CNP, DataNasterii, Telefon, email as 'EMAIL'" +
                                                 " FROM Client" +
                                                 " WHERE ( Nume LIKE @den) OR (Prenume LIKE @den) OR (Nume LIKE @den) OR (CNP LIKE @den) OR (email LIKE @den) OR (Telefon LIKE @den)" +
@@ -57,8 +58,10 @@ namespace AgentieTurismBackend.Administrare_Clienti
 
         private void dataGridView_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            // Verificam sa avem un rand intreg selectat
             if (dataGridView.SelectedCells.Count != 7)
                 return;
+            // Cand apasam pe un cap de linie, toata linia va fi selectata, iar valorile vor fi extrase in campurile de sub tabel, pentru a face modificarea mai usoara
             Nume.Text = dataGridView.SelectedCells[1].Value.ToString();
             Prenume.Text = dataGridView.SelectedCells[2].Value.ToString();
             CNP.Text = dataGridView.SelectedCells[3].Value.ToString();
@@ -71,11 +74,13 @@ namespace AgentieTurismBackend.Administrare_Clienti
         {
             if (dataGridView.SelectedCells.Count != 7)
                 return;
+            // Verificam sa avem valori valide pentru telefon si CNP
             if (CNP.TextLength != 13 || Regex.IsMatch(Telefon.Text, @"^[a-zA-Z]+$") || Regex.IsMatch(CNP.Text, @"^[a-zA-Z]+$"))
             {
                 MessageBox.Show("CNP sau Telefon invalid");
                 return;
             }
+            // Update In tabela cu noile valori in functie de cheia primara selectata
             SqlCommand command = new SqlCommand(" UPDATE Client " +
                                                 " SET Nume = @nume_nou," +
                                                 " Prenume = @prenume_nou," +
@@ -119,6 +124,7 @@ namespace AgentieTurismBackend.Administrare_Clienti
 
         private void stergeButton_Click(object sender, EventArgs e)
         {
+            // Stergerea unui client in functie de cheia primara
             SqlCommand command = new SqlCommand("DELETE FROM Client " +
                                                 " WHERE IDClient = @id", conn);
             SqlParameter parameter1 = new SqlParameter { ParameterName = "@id", Value = dataGridView.SelectedCells[0].Value.ToString() };
@@ -136,6 +142,13 @@ namespace AgentieTurismBackend.Administrare_Clienti
 
         private void addButton_Click(object sender, EventArgs e)
         {
+            // Verificam sa avem valori valide pentru telefon si CNP
+            if (CNP.TextLength != 13 || Regex.IsMatch(Telefon.Text, @"^[a-zA-Z]+$") || Regex.IsMatch(CNP.Text, @"^[a-zA-Z]+$"))
+            {
+                MessageBox.Show("CNP sau Telefon invalid");
+                return;
+            }
+            // Insert cu noile valori daca verificarea are succes
             SqlCommand command = new SqlCommand("INSERT into Client(Nume, Prenume, CNP, DataNasterii, Telefon, email) " +
                                                 " values(@nume, @prenume, @cnp, @data, @tel, @email)", conn);
 

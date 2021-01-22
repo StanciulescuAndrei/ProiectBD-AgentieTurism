@@ -22,6 +22,7 @@ namespace AgentieTurismBackend.Administrare_Locatii
 
         private void UpdateDataView()
         {
+            // Extragem destinatiile din baza de date in functie de criteriul de cautare din textbox
             SqlCommand command = new SqlCommand("SELECT Denumire FROM Destinatie WHERE Denumire LIKE @den ORDER BY Denumire ASC", conn);
             SqlParameter parameter = new SqlParameter { ParameterName = "@den", Value = "%" + searchTextBox.Text + "%" };
             command.Parameters.Add(parameter);
@@ -54,6 +55,7 @@ namespace AgentieTurismBackend.Administrare_Locatii
 
         private void button1_Click(object sender, EventArgs e)
         {
+            // Inserarea valorii noi in tabelul de destinatii
             SqlCommand command = new SqlCommand("INSERT into Destinatie(Denumire) values (@nume)", conn);
             SqlParameter parameter = new SqlParameter { ParameterName = "@nume", Value = fieldValue.Text};
             command.Parameters.Add(parameter);
@@ -71,8 +73,10 @@ namespace AgentieTurismBackend.Administrare_Locatii
 
         private void modificaButton_Click(object sender, EventArgs e)
         {
+            // Verificam daca avem vreo celula selectata
             if (dataGridView.SelectedCells.Count == 0)
                 return;
+            // Se face update in functie de numele selectat din tabel
             SqlCommand command = new SqlCommand("UPDATE Destinatie SET Denumire = @nume_nou WHERE Denumire = @nume_vechi", conn);
             SqlParameter parameter1 = new SqlParameter { ParameterName = "@nume_vechi", Value = dataGridView.SelectedCells[0].Value.ToString() };
             SqlParameter parameter2 = new SqlParameter { ParameterName = "@nume_nou", Value = fieldValue.Text };
@@ -92,10 +96,10 @@ namespace AgentieTurismBackend.Administrare_Locatii
 
         private void stergeButton_Click(object sender, EventArgs e)
         {
-
-            //MessageBox.Show(dataGridView.SelectedRows[0].Cells[0].Value.ToString());
+            // Verificam daca avem vreo celula selectata
             if (dataGridView.SelectedCells.Count == 0)
                 return;
+            // Se face delete in functie de numele selectat din tabel
             SqlCommand command = new SqlCommand("DELETE from Destinatie WHERE Denumire = @nume", conn);
             SqlParameter parameter = new SqlParameter { ParameterName = "@nume", Value = dataGridView.SelectedCells[0].Value.ToString() };
             command.Parameters.Add(parameter);

@@ -23,6 +23,7 @@ namespace AgentieTurismBackend.Administrare_Locatii
 
         private void UpdateDataView()
         {
+            // Extragem unitatile de cazare si locatiile aferente in functie de termenul de cautare
             SqlCommand command = new SqlCommand("SELECT Dest.Denumire as Destinatie, UC.Nume as Cazare, UC.PretNoapte as Pret " +
                                                 " FROM UnitatiCazare as UC JOIN Destinatie as Dest on UC.IDDestinatie = Dest.IDDestinatie" +
                                                 " WHERE (Dest.Denumire LIKE @den) OR (UC.Nume LIKE @den)" +
@@ -45,7 +46,7 @@ namespace AgentieTurismBackend.Administrare_Locatii
                 }
             }
         }
-
+        // Actualizeaza valorile posibile din meniul drop-down cu valorile din tabelul de detinatii
         private void UpdateLocations()
         {
             SqlCommand command = new SqlCommand("SELECT Denumire FROM Destinatie", conn);
@@ -91,6 +92,7 @@ namespace AgentieTurismBackend.Administrare_Locatii
         {
             if (dataGridView.SelectedCells.Count != 3)
                 return;
+            // Cand apasam pe un cap de linie, toata linia va fi selectata, iar valorile vor fi extrase in campurile de sub tabel, pentru a face modificarea mai usoara
             Destinatie_comboBox.SelectedItem = dataGridView.SelectedCells[0].Value.ToString();
             Cazare.Text = dataGridView.SelectedCells[1].Value.ToString();
             Pret.Value = Decimal.Parse(dataGridView.SelectedCells[2].Value.ToString());
@@ -98,6 +100,7 @@ namespace AgentieTurismBackend.Administrare_Locatii
 
         private void addButton_Click(object sender, EventArgs e)
         {
+            // Adauga o noua unitate de cazare, cu subcerere pentru cheia destinatiei
             SqlCommand command = new SqlCommand("INSERT into UnitatiCazare(IDDestinatie, Nume, PretNoapte) " +
                                                 " values((SELECT IDDestinatie FROM Destinatie WHERE Denumire = @dest), @nume, @pret)", conn);
             SqlParameter parameter1 = new SqlParameter { ParameterName = "@dest", Value = Destinatie_comboBox.SelectedItem.ToString()};
@@ -121,6 +124,7 @@ namespace AgentieTurismBackend.Administrare_Locatii
         {
             if (dataGridView.SelectedCells.Count != 3)
                 return;
+            // Modifica o anumita locatie de cazare, selectia se face in functie de campurile afisate, nu dupa cheia primara
             SqlCommand command = new SqlCommand(" UPDATE UnitatiCazare " +
                                                 " SET IDDestinatie = (SELECT IDDestinatie FROM Destinatie WHERE Denumire = @dest_nou), Nume = @nume_nou, PretNoapte = @pret_nou" +
                                                 " WHERE IDDestinatie = (SELECT IDDestinatie FROM Destinatie WHERE Denumire = @dest) AND Nume=@nume AND PretNoapte=@pret", conn);
@@ -149,6 +153,7 @@ namespace AgentieTurismBackend.Administrare_Locatii
 
         private void stergeButton_Click(object sender, EventArgs e)
         {
+            // Sterge o anumita locatie de cazare, selectia se face in functie de campurile afisate, nu dupa cheia primara
             SqlCommand command = new SqlCommand("DELETE FROM UnitatiCazare " +
                                                 " WHERE IDDestinatie = (SELECT IDDestinatie FROM Destinatie WHERE Denumire = @dest) AND Nume=@nume AND PretNoapte=@pret", conn);
             SqlParameter parameter1 = new SqlParameter { ParameterName = "@dest", Value = Destinatie_comboBox.SelectedItem.ToString() };

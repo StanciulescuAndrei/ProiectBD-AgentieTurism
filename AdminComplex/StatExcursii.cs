@@ -22,6 +22,7 @@ namespace AgentieTurismBackend.AdminComplex
 
         private void UpdateDataTable(SqlCommand command)
         {
+            // Umple tabelul din interfata cu rezultatele comanzii executate
             using (var reader = command.ExecuteReader())
             {
                 dataGrid.Rows.Clear();
@@ -132,9 +133,9 @@ namespace AgentieTurismBackend.AdminComplex
             SqlCommand command = new SqlCommand("SELECT UC.Nume, D.Denumire, UC.PretNoapte                 "+
                                                 "FROM UnitatiCazare as UC                                  "+
                                                 "JOIN Destinatie as D on D.IDDestinatie = UC.IDDestinatie  "+
-                                                "WHERE UC.PretNoapte > @pret                                 "+
+                                                "WHERE UC.PretNoapte > @pret                               "+
                                                 "and                                                       "+
-                                                "0 = (   SELECT COUNT(1)                                   "+
+                                                " NOT EXISTS (SELECT *                                     "+
                                                 "        FROM Rezervare as R                               "+
                                                 "        WHERE R.IDCazare = UC.IDCazare                    "+
                                                 "        and R.DataPlecare > @data)", conn);
@@ -147,6 +148,11 @@ namespace AgentieTurismBackend.AdminComplex
                 command.Parameters.Add(parameter);
             }
             UpdateDataTable(command);
+        }
+
+        private void StatExcursii_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
