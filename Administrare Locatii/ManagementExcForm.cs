@@ -49,7 +49,8 @@ namespace AgentieTurismBackend.Administrare_Locatii
         private void UpdateDataView()
         {
             // Extrage excursiile din baza de date, impreuna cu destinatiile si categoriile respective, ca sa nu fie afisate chei artificiale
-            SqlCommand command = new SqlCommand("SELECT Ex.IDExcursie, Cat.Denumire as Categorie, Dest.Denumire as Destinatie, Ex.Denumire as Denumire, Ex.Durata as Durata, Ex.NrMaximParticipanti as MaxParticipanti, Ex.PretBaza as PretBaza, Ex.Transport as TransportInclus " +
+            SqlCommand command = new SqlCommand("SELECT Ex.IDExcursie, Cat.Denumire as Categorie, Dest.Denumire as Destinatie, Ex.Denumire as Denumire, Ex.Durata as Durata," +
+                                                " Ex.NrMaximParticipanti as MaxParticipanti, Ex.PretBaza as PretBaza, Ex.Transport as TransportInclus " +
                                                 " FROM Excursie as Ex JOIN Destinatie as Dest on Ex.IDDestinatie = Dest.IDDestinatie" +
                                                 " JOIN Categorie as Cat on Ex.IDCategorie = Cat.IDCategorie" +
                                                 " WHERE (Dest.Denumire LIKE @den) OR (Ex.Denumire LIKE @den) OR (Cat.Denumire LIKE @den)" +

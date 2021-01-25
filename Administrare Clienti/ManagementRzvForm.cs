@@ -48,7 +48,8 @@ namespace AgentieTurismBackend.Administrare_Clienti
         private void UpdateDataView()
         {
             // Extrage rezervarile din baza de date, selectate in functie de termenul de cautare, impreuna cu excursia, cazarea si clientul
-            SqlCommand command = new SqlCommand("SELECT Rzv.IDRezervare, Ex.Denumire as Excursie, Cazare.Nume as Cazare, Client.Nume as NumeClient , Client.Prenume as PrenumeClient, Rzv.DataPlecare as Data, Rzv.Avans as Avans" +
+            SqlCommand command = new SqlCommand("SELECT Rzv.IDRezervare, Ex.Denumire as Excursie, Cazare.Nume as Cazare, Client.Nume as NumeClient ," +
+                                                " Client.Prenume as PrenumeClient, Rzv.DataPlecare as Data, Rzv.Avans as Avans" +
                                                 " FROM Rezervare as Rzv" +
                                                 " JOIN Excursie as Ex on Ex.IDExcursie = Rzv.IDExcursie" +
                                                 " JOIN UnitatiCazare as Cazare on Cazare.IDCazare = Rzv.IDCazare" +

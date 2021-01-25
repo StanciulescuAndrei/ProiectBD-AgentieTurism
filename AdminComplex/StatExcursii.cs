@@ -154,5 +154,33 @@ namespace AgentieTurismBackend.AdminComplex
         {
 
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            SqlCommand command = new SqlCommand("SELECT D.Denumire, COUNT(UC.IDCazare) as NumarCazari           "+
+                                                " FROM Destinatie as D                                          "+
+                                                " JOIN UnitatiCazare as UC ON D.IDDestinatie = UC.IDDestinatie  "+
+                                                " GROUP BY D.Denumire ", conn);
+            UpdateDataTable(command);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            SqlCommand command = new SqlCommand(" SELECT C.Nume, C.Prenume                                       "+
+                                                " FROM Client as C                                               "+
+                                                " LEFT JOIN ClientRezervare as CR on CR.IDClient = C.IDClient    "+
+                                                " WHERE CR.IDClient is NULL ", conn);
+            UpdateDataTable(command);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            SqlCommand command = new SqlCommand(" SELECT D.Denumire, COUNT(E.IDDestinatie) as NumarExcursii "+
+                                                " FROM Destinatie as D                                      "+
+                                                " JOIN Excursie as E ON E.IDDestinatie = D.IDDestinatie     "+
+                                                " GROUP BY D.Denumire                                       "+
+                                                " HAVING COUNT(E.IDDestinatie) >= 2", conn);
+            UpdateDataTable(command);
+        }
     }
 }

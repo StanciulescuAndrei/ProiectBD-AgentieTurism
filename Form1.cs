@@ -16,6 +16,20 @@ namespace AgentieTurismBackend
 
         readonly string connectionString = "Data Source=STANCIU\\SQLEXPRESS;Initial Catalog=AgentieTurism;Integrated Security=True";
         SqlConnection conn = null;
+        private void OpenDBConnection()
+        {
+            conn = new SqlConnection(connectionString);
+            try
+            {
+                conn.Open();
+                statusLabel.Text = connStatus;
+            }
+            catch (Exception e)
+            {
+                statusLabel.Text = notConnStatus;
+                MessageBox.Show(e.ToString());
+            }
+        }
 
         readonly string connStatus = "Status: Database connected";
         readonly string notConnStatus = "Status: Not connected";
@@ -25,21 +39,7 @@ namespace AgentieTurismBackend
             InitializeComponent();
         }
 
-        private void OpenDBConnection()
-        {
-            conn = new SqlConnection(connectionString);
-            try
-            {
-                conn.Open();
-                statusLabel.Text = connStatus;
-            }
-            catch(Exception e)
-            {
-                statusLabel.Text = notConnStatus;
-                MessageBox.Show(e.ToString());
-            }
-        }
-
+        
         private void CloseDBConnection()
         {
             try
